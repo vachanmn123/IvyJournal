@@ -22,6 +22,7 @@ input("THIS PROGRAM WILL USE THE DIRECTORY SPECIFIED IN THE `config.json` FILE A
 import json
 import hashlib
 import os
+import getpass
 
 # load the config file
 with open('config.json') as f:
@@ -33,8 +34,8 @@ path_to_storage = config['path_to_storage']
 # Warn the user about losing data if password is forgotten
 print("You will now set a new password, this password is the only way you can access the journal, if you lose it all the data in your jounal WILL BE UNACCESSABLE!")
 # Ask user for a new password
-new_paswd = input("Please enter a new password")
-if input("Confirm: ") == new_paswd:
+new_paswd = getpass.getpass(prompt="Please enter a new password")
+if getpass.getpass(prompt="Confirm: ") == new_paswd:
     print("Creating new journal...")
     with open(os.path.join(path_to_storage, 'passwd.ivypwd'), 'wb') as pwdfile:
         # Encrypt the password
