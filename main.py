@@ -23,6 +23,7 @@ from cryptography.fernet import Fernet
 import base64
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+import getpass
 
 # set authenticated flag to false by default
 authenticated = False
@@ -48,7 +49,7 @@ if not os.path.join(path_to_storage, 'passwd.ivypaswd'):
     print("No password file found. Please create a passwd.ivypaswd file using create_journal.py")
     exit()
 # Ask user for password to journal and hash it SHA256
-usr_passwd = hashlib.sha256(input("Please enter your password: ").encode()).hexdigest()
+usr_passwd = hashlib.sha256(getpass.getpass(prompt="Please enter your password: ").encode()).hexdigest()
 # Get stored password from file
 with open(os.path.join(path_to_storage, 'paswd.ivypwd'), 'r') as f:
     stored_passwd = f.read()
