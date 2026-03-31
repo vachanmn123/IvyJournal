@@ -37,10 +37,10 @@ print("You will now set a new password, this password is the only way you can ac
 new_paswd = getpass.getpass(prompt="Please enter a new password")
 if getpass.getpass(prompt="Confirm: ") == new_paswd:
     print("Creating new journal...")
-    with open(os.path.join(path_to_storage, 'passwd.ivypwd'), 'wb') as pwdfile:
-        # Encrypt the password
-        pass_hash=hashlib.sha256(new_paswd.encode()).digest()
-        # Write the encrypted password to the file
+    with open(os.path.join(path_to_storage, 'passwd.ivypwd'), 'w') as pwdfile:
+        # Hash the password with SHA256 hex digest
+        pass_hash = hashlib.sha256(new_paswd.encode()).hexdigest()
+        # Write the hashed password to the file
         pwdfile.write(pass_hash)
     print("New journal created!")
 else:

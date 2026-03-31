@@ -44,14 +44,14 @@ except FileNotFoundError:
     # If the path to the storage folder doesn't exist print an error message
     print(f"No such file or directory: '{config['path_to_storage']}'")
     exit()
-if not os.path.join(path_to_storage, 'passwd.ivypaswd'):
+if not os.path.exists(os.path.join(path_to_storage, 'passwd.ivypwd')):
     # If the password file doesn't exist print an error message
-    print("No password file found. Please create a passwd.ivypaswd file using create_journal.py")
+    print("No password file found. Please create a passwd.ivypwd file using create_journal.py")
     exit()
 # Ask user for password to journal and hash it SHA256
 usr_passwd = hashlib.sha256(getpass.getpass(prompt="Please enter your password: ").encode()).hexdigest()
 # Get stored password from file
-with open(os.path.join(path_to_storage, 'paswd.ivypwd'), 'r') as f:
+with open(os.path.join(path_to_storage, 'passwd.ivypwd'), 'r') as f:
     stored_passwd = f.read()
 # Check if the password is correct
 if usr_passwd == stored_passwd.lower():
